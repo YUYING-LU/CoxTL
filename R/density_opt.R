@@ -1,4 +1,3 @@
-
 density_opt<-function(Xs,Xt,lam){
   mm<-function(theta_0){
     theta_0<-as.matrix(theta_0,ncol=1)

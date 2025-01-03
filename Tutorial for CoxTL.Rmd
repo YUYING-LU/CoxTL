@@ -39,7 +39,7 @@ In our simulation part, we use function `Generate_data()` for data generation. H
 
 
 ```{r}
-set.seed(100)
+set.seed(1)
 
 N<-20000 # Total samples for generation
 Ns<-4000 # sample size of source data

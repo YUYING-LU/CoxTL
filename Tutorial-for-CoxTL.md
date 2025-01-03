@@ -5,9 +5,17 @@ Yuying Lu
 
 This is a tutorial about how to use the CoxTL method.
 
+If you haven’t install ‘CoxTL’ package, please use the following code:
+
+``` r
+library(devtools)
+install_github("YUYING-LU/CoxTL")
+```
+
 ## Import Necessary Packages
 
 ``` r
+library(CoxTL)
 library(tidyverse)
 library(survival)
 library(pec)
@@ -15,10 +23,6 @@ library(MASS)
 library(Matrix)
 library(rms)
 library(survex)
-
-source('R/Generate_data.R')
-source('R/density_opt.R')
-source('R/CoxTL.R')
 ```
 
 ## Data Generation
@@ -27,7 +31,7 @@ In our simulation part, we use function `Generate_data()` for data
 generation. Here is an example of data generation.
 
 ``` r
-set.seed(100)
+set.seed(1)
 
 N<-20000 # Total samples for generation
 Ns<-4000 # sample size of source data
@@ -105,7 +109,7 @@ theta<-w_opt$estimate
 wei_ts<-exp(Xs_new%*%matrix(theta,ncol=1))
 
 ## Step 2: fit CoxTL
-cox_tl<-CoxTL(data_t,data_s,weights=wei_ts,p)
+cox_tl<-run_CoxTL(data_t,data_s,weights=wei_ts,p)
 
 
 time_test<-seq(0,1.5,0.01)
@@ -134,8 +138,8 @@ cbind(Method=Method,data.frame(C_index=C_index,IBS=IBS,p=paste0('p=',p),Setting=
 ```
 
     ##            Method   C_index       IBS    p Setting eta
-    ## Cox_Orac Cox_Orac 0.7664648 0.1738211 p=50       4 0.5
-    ## Cox_T       Cox_T 0.6908873 0.2462857 p=50       4 0.5
-    ## Cox_S       Cox_S 0.6759363 0.2202200 p=50       4 0.5
-    ## Cox_Str   Cox_Str 0.6781042 0.2423069 p=50       4 0.5
-    ## CoxTL       CoxTL 0.7182477 0.1935623 p=50       4 0.5
+    ## Cox_Orac Cox_Orac 0.7735005 0.1584045 p=50       4 0.5
+    ## Cox_T       Cox_T 0.6933568 0.2069622 p=50       4 0.5
+    ## Cox_S       Cox_S 0.7012025 0.2015833 p=50       4 0.5
+    ## Cox_Str   Cox_Str 0.7089749 0.2172876 p=50       4 0.5
+    ## CoxTL       CoxTL 0.7359584 0.1716043 p=50       4 0.5

@@ -1,4 +1,4 @@
-CoxTL<-function(data_t,data_s,weights=NULL,di,folds_num=5,lam_set=c(0.001,0.005,0.01,0.05,0.1,1:10)){
+run_CoxTL<-function(data_t,data_s,weights=NULL,di,folds_num=5,lam_set=c(0.001,0.005,0.01,0.05,0.1,1:10)){
   num_t<-dim(data_t)[1]
   num_s<-dim(data_s)[1]
   size_ratio<-num_t/num_s

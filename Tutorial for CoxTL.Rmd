@@ -12,9 +12,17 @@ knitr::opts_chunk$set(echo = TRUE,warning=FALSE, message=FALSE,dpi=600)
 
 This is a tutorial about how to use the CoxTL method.
 
+If you haven't install 'CoxTL' package, please use the following code:
+
+```{r, eval=FALSE}
+library(devtools)
+install_github("YUYING-LU/CoxTL")
+```
+
 ## Import Necessary Packages
 
 ```{r}
+library(CoxTL)
 library(tidyverse)
 library(survival)
 library(pec)
@@ -22,11 +30,6 @@ library(MASS)
 library(Matrix)
 library(rms)
 library(survex)
-
-source('R/Generate_data.R')
-source('R/density_opt.R')
-source('R/CoxTL.R')
-
 ```
 
 
@@ -114,7 +117,7 @@ theta<-w_opt$estimate
 wei_ts<-exp(Xs_new%*%matrix(theta,ncol=1))
 
 ## Step 2: fit CoxTL
-cox_tl<-CoxTL(data_t,data_s,weights=wei_ts,p)
+cox_tl<-run_CoxTL(data_t,data_s,weights=wei_ts,p)
 
 
 time_test<-seq(0,1.5,0.01)
